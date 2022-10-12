@@ -1,0 +1,54 @@
+{% extends 'gtd/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Time Manager{% endblock %}
+
+{% block content %}
+<form method="get">
+    {% csrf_token %}
+    {% comment %} {{ form.non_field_errors }} {% endcomment %}
+    {% bootstrap_form form bound_css_class='' %}
+    {% buttons %}
+        <input type="submit" value="Query">
+    {% endbuttons %}
+</form>
+
+{% if time_management_list %}
+    {% for project, task_time_entries_list, proj_month_total, proj_week_total in time_management_list %}
+        {% if proj_month_total > zero_timedelta or proj_week_total > zero_timedelta %}
+            <h2>{{ project.name }}</h1>
+            <p>
+                Total for month {{ month }}:
+                {{ proj_month_total }}
+            </p>
+            <p>
+                Total for week of {{ week }}:
+                {{ proj_week_total }}
+            </p>
+            <ul>
+                {% for task, task_month_total, task_week_total  in task_time_entries_list %}
+                    {% if task_month_total > zero_timedelta or task_week_total > zero_timedelta %}
+                        <li>
+                            <p style="font-weight: bold">
+                                {{ task.name }}
+                            </p>
+                            <p>
+                                Total for month {{ month }}:
+                                {{ task_month_total }}
+                            </p>
+                            <p>
+                                Total for week of {{ week }}:
+                                {{ task_week_total }}
+                            </p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>No tasks are available.</p>
+{% endif %}
+
+{% endblock %}

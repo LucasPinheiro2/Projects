@@ -1,0 +1,25 @@
+{% extends 'gtd/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Task Manager{% endblock %}
+
+{% block content %}
+<form method="get">
+    {% csrf_token %}
+    {% bootstrap_form form bound_css_class='' %}
+    {% buttons %}
+        <input type="submit" value="Query">
+    {% endbuttons %}
+</form>
+
+<p>
+    Average for month {{ month }}:
+    {{ task_month_average }}
+</p>
+<p>
+    Average for week of {{ week }}:
+    {{ task_week_average }}
+</p>
+
+{% endblock %}

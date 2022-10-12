@@ -1,0 +1,52 @@
+{% extends 'gtd/base.html' %}
+
+{% block title %}GTD App{% endblock %}
+
+{% block content %}
+    <form method="GET" action="{% url 'create-project' %}">{% csrf_token %}<input type="submit" value="Create project"></form>
+    <form method="GET" action="{% url 'time-manager' %}">{% csrf_token %}<input type="submit" value="Time manager"></form>
+    <form method="GET" action="{% url 'task-manager' %}">{% csrf_token %}<input type="submit" value="Task manager"></form>
+    {% if project_and_tasks_list %}
+        {% for project, task_time_entries_list in project_and_tasks_list %}
+            <h2>{{ project.name }}</h1>
+            <div>
+                <form method="GET" action="{% url 'update-project' project.id %}">{% csrf_token %}<input type="submit" value="Edit project"></form>
+                <form method="GET" action="{% url 'create-task' project.id %}">{% csrf_token %}<input type="submit" value="Create task"></form>
+                <form method="GET" action="{% url 'delete-project' project.id %}">{% csrf_token %}<input type="submit" value="Delete project"></form>
+            </div>
+            <ul>
+            {% for task, time_entries in task_time_entries_list %}
+                <li>
+                    <p style="font-weight: bold">
+                        {{ task.name }}
+                        {% if task.completed %}
+                        (COMPLETED)
+                        {% endif %}
+                    </p>
+                    {% if task.description %}
+                        <p>{{ task.description }}</p>
+                    {% endif %}
+                    {% if time_entries %}
+                        <ul>
+                            {% for time_entry in time_entries %}
+                                <li>
+                                    {{ time_entry }}
+                                    <form method="GET" action="{% url 'update-time-entry' project.id task.id time_entry.id %}">{% csrf_token %}<input type="submit" value="Edit {{ time_entry.meta.verbose_name }}"></form>
+                                    <form method="GET" action="{% url 'delete-time-entry' project.id task.id time_entry.id %}">{% csrf_token %}<input type="submit" value="Delete {{ time_entry.meta.verbose_name }}"></form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div>
+                        <form method="GET" action="{% url 'update-task' project.id task.id %}">{% csrf_token %}<input type="submit" value="Edit task"></form>
+                        <form method="GET" action="{% url 'delete-task' project.id task.id %}">{% csrf_token %}<input type="submit" value="Delete task"></form>
+                        <form method="GET" action="{% url 'create-time-entry' project.id task.id %}">{% csrf_token %}<input type="submit" value="Time task"></form>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No tasks or projects are available.</p>
+    {% endif %}
+{% endblock %}

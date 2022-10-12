@@ -1,0 +1,15 @@
+{% extends 'gtd/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Create {{ view.model.meta.verbose_name }}{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <input type="submit" value="Save">
+    {% endbuttons %}
+</form>
+{% endblock %}

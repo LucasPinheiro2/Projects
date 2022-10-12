@@ -1,0 +1,44 @@
+{% extends 'gtd/base.html' %}
+
+{% load bootstrap4 %}
+
+{% load tz %}
+
+{% block title %}Timer{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="row justify-content-center">
+        <div class="col-md-12 mb-3">
+            <div class="card bg-dark text-white">
+                <h3 class="card-title text-center">
+                    <div class="d-flex flex-wrap justify-content-center mt-2" id="clock">
+                        0:00:00
+                    </div>
+                </h3>
+            </div>
+        </div>
+    </div>
+    {% buttons %}
+        <input type="submit" value="Stop and Save">
+    {% endbuttons %}
+</form>
+<script>
+    function updateClock() {
+        setTimeout(function() {
+            let now = moment();
+            let start_time = document.getElementById('id_start');
+            let end_time = document.getElementById('id_end');
+            let clock = document.getElementById('clock');
+            let format = JSON.parse(end_time.attributes.dp_config.value).options.format;
+            let duration = moment.duration(now.diff(moment(start_time.value, format)));
+            end_time.value = now.format(format);
+            clock.innerHTML = `${duration.hours()}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`
+            updateClock();
+        }, 100);
+    }
+    $(updateClock);
+</script>
+{% endblock %}

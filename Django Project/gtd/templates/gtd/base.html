@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% load bootstrap4 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        {{ form.media }}
+
+        <style>
+            body { padding: 1em; }
+            input { margin-bottom: .5em; }
+            form { display:inline; }
+            ul ul { margin-bottom: 1em; }
+        </style>
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+
+    {% block content %}{% endblock %}
+
+    </body>
+</html>

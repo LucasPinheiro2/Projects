@@ -1,0 +1,4 @@
+[
+    (project_name, total_time_spent_on_project, [(task_name, total_time_spent_on_task)...])
+    ...
+]
