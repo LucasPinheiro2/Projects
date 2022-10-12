@@ -1,0 +1,92 @@
+button {
+  background-color: #ffffff;
+  color: #4682b4; /* steel blue */
+  border: 0px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+h1 {
+  color: #325d81;
+}
+
+h2 {
+  color: #595959;
+}
+h3 {
+  color: #325d81;
+}
+
+h4 {
+  color: #595959;
+}
+
+html {
+  background-color: lightsteelblue;
+}
+
+hr {
+  background-color: steelblue; /*fill inside */
+  border: 3px solid steelblue;
+  border-radius: 5px;
+  width: 75%;
+}
+
+input {
+  background-color: #ffffff;
+  color: #4682b4; /* steel blue */
+  border: 0px;
+  padding: 5px;
+  margin: 0px 0px 5px 10px;
+  display: table-cell;
+}
+
+form {
+  /* for alignment with labels and inputs */
+  display: table;
+}
+label {
+  color: #424242;
+  display: table-cell;
+}
+
+ul {
+  /*remove bullet point */
+  list-style: none;
+  border: 10px white;
+}
+
+.datesList {
+  color: #808080; /*gray */
+}
+
+.main {
+  background-color: #d3d3d3; /* light gray */
+  color: #4682b4; /* steel blue */
+  padding: 10px;
+}
+.list {
+  /* styling lists as boxes */
+  border: 5px solid white;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 4px;
+  width: 300px;
+}
+.reg-form-group {
+  display: table-row;
+}
+
+#logoutButton {
+  /* align logout button to right of screen*/
+  background-color: #4682b4;
+  color: #ffffff; /* steel blue */
+  border: 0px;
+  padding: 10px;
+  margin-top: 5px;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 20%;
+  text-align: center;
+}
